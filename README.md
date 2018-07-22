@@ -4,7 +4,7 @@
 
 This is a universal serial terminal library for Arduino.
 
-![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/SerialTerminal.png)
+![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/ScreenshotSerialTerminal.png)
 
 ## Hardware
 

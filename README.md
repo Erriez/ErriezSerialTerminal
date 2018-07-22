@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Erriez/ErriezSerialTerminal.svg?branch=master)](https://travis-ci.org/Erriez/ErriezSerialTerminal)
 
-This is a universal serial terminal library for Arduino.
+This is a universal Serial Terminal library for Arduino to parse ASCII commands and arguments.
 
 ![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/ScreenshotSerialTerminal.png)
 

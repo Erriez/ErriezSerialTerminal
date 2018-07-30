@@ -166,6 +166,7 @@ Optional: The serial receive buffer can be cleared with the following call:
 term.clearBuffer();
 ```
 
+
 ## Library configuration
 
 ```SerialTerminal.h``` contains the following configuration macro's:
@@ -173,3 +174,17 @@ term.clearBuffer();
 * ```ST_RX_BUFFER_SIZE``` : The default serial receive buffer size is 32 Bytes. This includes the command and arguments, excluding the ```'\0'``` character.
 * ```ST_NUM_COMMAND_CHARS```: The default number of command characters is 8 Bytes, excluding the ```'\0'``` character.
 
+
+## Library dependencies
+
+* None
+
+
+## Library installation
+
+Please refer to the [Wiki](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki) page.
+
+
+## Other Arduino Libraries and Sketches from Erriez
+
+* [Erriez Libraries and Sketches](https://github.com/Erriez/ErriezArduinoLibrariesAndSketches)

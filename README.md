@@ -6,17 +6,22 @@ This is a universal Serial Terminal library for Arduino to parse ASCII commands 
 
 ![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/ScreenshotSerialTerminal.png)
 
+
 ## Hardware
 
 Any Arduino hardware with a serial port.
+
 
 ## Examples
 
 * Examples | Erriez Serial Terminal | [GettingStarted](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/GettingStarted/GettingStarted.ino)
 
+
 ## Documentation
 
-- [Doxygen online HTML](https://erriez.github.io/ErriezSerialTerminal)
+- [Online HTML](https://erriez.github.io/ErriezSerialTerminal)
+- [Download PDF](https://github.com/Erriez/ErriezSerialTerminal/raw/gh-pages/latex/ErriezSerialTerminal.pdf)
+
 
 ## Usage
 
@@ -177,7 +182,7 @@ term.clearBuffer();
 
 ## Library dependencies
 
-* None
+* None.
 
 
 ## Library installation

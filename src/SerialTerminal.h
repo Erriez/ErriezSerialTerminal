@@ -26,7 +26,8 @@
  * \brief Serial terminal library for Arduino
  * \file SerialTerminal.h
  * \details
- *      Source: https://github.com/Erriez/ErriezSerialTerminal
+ *      Source:         https://github.com/Erriez/ErriezSerialTerminal
+ *      Documentation:  https://erriez.github.io/ErriezSerialTerminal
  */
 
 #ifndef SERIAL_TERMINAL_H_

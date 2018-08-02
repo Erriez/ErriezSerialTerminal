@@ -1,37 +1,75 @@
-# Continuous Integration (CI) is the practice, in software
-# engineering, of merging all developer working copies with a shared mainline
-# several times a day < http://docs.platformio.org/page/ci/index.html >
+################################################################################
+# Title         : .travis.yml
+# Date created  : 2 August 2018
+# Author        : Erriez"
 #
-# Documentation:
+# This is a Continuous Integration script for Travis CI:
+# - Build Arduino examples with PlatformIO by using the library sources.
+# - Build Doxygen HTML and PDF and push this automatically to gh-pages. The
+#   documentation is published at: https://<USER>.github.io/<REPOSITORY_NAME
 #
-# * Travis CI Embedded Builds with PlatformIO
-#   < https://docs.travis-ci.com/user/integration/platformio/ >
-#
-# * PlatformIO integration with Travis CI
-#   < http://docs.platformio.org/page/ci/travis.html >
-#
-# * User Guide for `platformio ci` command
-#   < http://docs.platformio.org/page/userguide/cmd_ci.html >
-#
-#
-# Please choice one of the following templates (proposed below) and uncomment
-# it (remove "# " before each line) or use own configuration according to the
-# Travis CI documentation (see above).
-#
-language: python
+#############################################################################
 
+# This will run on Travis' 'new' container-based infrastructure
+sudo: false
+
+# Use Python 2.7 for PlatformIO
+language: python
 python:
     - "2.7"
 
-sudo: false
-
+# Cache platformIO directory
 cache:
    directories:
        - "~/.platformio"
 
+# Blacklist
+branches:
+  except:
+    - gh-paghes
+
+# Environment variables
+env:
+  global:
+    - GH_REPO_NAME: ErriezSerialTerminal
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - GH_REPO_REF: github.com/Erriez/ErriezSerialTerminal.git
+
+# Install dependencies
+addons:
+  apt:
+    packages:
+      - doxygen-latex
+
+before_install:
+  # Install doxygen 1.8.11 from binary, because older versions throw errors on markdown code with
+  # images inside links (like the build status in the README) and it's the only way to get a newer
+  # doxygen in Ubuntu
+  - export DOXYGEN_VER=doxygen-1.8.11
+  - export DOXYGEN_TAR=${DOXYGEN_VER}.linux.bin.tar.gz
+  - export DOXYGEN_URL="http://ftp.stack.nl/pub/users/dimitri/${DOXYGEN_TAR}"
+
+# Install Python PlatformIO
 install:
    - pip install -U platformio
    - platformio update
 
+# Run PlatformIO CI build
 script:
-   - platformio ci --lib="." --project-conf=platformio/platformio.ini examples/GettingStarted/GettingStarted.ino
+  # Build Arduino examples with PlatformIO by using the library sources
+  - chmod +x .auto-build.sh
+  - ./.auto-build.sh
+
+# Build and deploy Doxygen documentation only on push master branch
+after_success:
+  - |
+    if [ "${TRAVIS_BRANCH}" == "master" ] ; then
+      # Extract Doxygen binaries and set path
+      wget -O - "${DOXYGEN_URL}" | tar xz -C ${TMPDIR-/tmp} ${DOXYGEN_VER}/bin/doxygen
+      export PATH="${TMPDIR-/tmp}/${DOXYGEN_VER}/bin:$PATH"
+
+      # Build Doxygen HTML and PDF
+      cd $TRAVIS_BUILD_DIR
+      chmod +x .deploy-doc.sh
+      ./.deploy-doc.sh
+    fi

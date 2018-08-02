@@ -1,0 +1,219 @@
+\href{https://travis-ci.org/Erriez/ErriezSerialTerminal}{\tt }
+
+This is a universal Serial Terminal library for Arduino to parse A\+S\+C\+II commands and arguments.
+
+
+
+\subsection*{Hardware}
+
+Any Arduino hardware with a serial port.
+
+\subsection*{Examples}
+
+
+\begin{DoxyItemize}
+\item Examples $\vert$ Erriez Serial Terminal $\vert$ \href{https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/GettingStarted/GettingStarted.ino}{\tt Getting\+Started}
+\end{DoxyItemize}
+
+\subsection*{Documentation}
+
+
+\begin{DoxyItemize}
+\item \href{https://erriez.github.io/ErriezSerialTerminal}{\tt Online H\+T\+ML}
+\item \href{https://github.com/Erriez/ErriezSerialTerminal/raw/gh-pages/latex/ErriezSerialTerminal.pdf}{\tt Download P\+DF}
+\end{DoxyItemize}
+
+\subsection*{Usage}
+
+{\bfseries Initialization}
+
+Create a Serial Terminal object. This can be initialized with optional newline and delimiter characters.
+
+Default newline character\+: {\ttfamily \textquotesingle{}\textbackslash{}n\textquotesingle{}} Default delimiter character\+: {\ttfamily Space}
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 #include <SerialTerminal.h>
+3 
+4 // Newline character '\(\backslash\)r' or '\(\backslash\)n'
+5 char newlineChar = '\(\backslash\)n'; 
+6 // Separator character between commands and arguments
+7 char delimiterChar = ' ';
+8 
+9 // Create serial terminal object
+10 SerialTerminal term(newlineChar, delimiterChar);
+11 
+12 
+13 void setup()
+14 \{
+15     // Initialize serial port
+16     Serial.begin(115200);
+17 
+18     // Initialize the built-in LED
+19     pinMode(LED\_BUILTIN, OUTPUT);
+20     digitalWrite(LED\_BUILTIN, LOW);
+21 \}
+\end{DoxyCode}
+ {\bfseries Register new commands}
+
+Commands must be registered at startup with a corresponding {\ttfamily callback handler} . This registers the command only, excluding arguments.
+
+The callback handler will be called when the command has been received including the newline character.
+
+An example of registering multiple commands\+:
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 void setup()
+3 \{
+4     ...
+5 
+6     // Add command callback handlers
+7     term.addCommand("?", cmdHelp);
+8     term.addCommand("help", cmdHelp);
+9     term.addCommand("on", cmdLedOn);
+10     term.addCommand("off", cmdLedOff);
+11 \}
+12 
+13 void cmdHelp()
+14 \{
+15     // Print usage
+16     Serial.println(F("Serial terminal usage:"));
+17     Serial.println(F("  help or ?          Print this usage"));
+18     Serial.println(F("  on                 Turn LED on"));
+19     Serial.println(F("  off                Turn LED off"));
+20 \}
+21 
+22 void cmdLedOn()
+23 \{
+24     // Turn LED on
+25     Serial.println(F("LED on"));
+26     digitalWrite(LED\_BUILTIN, HIGH);
+27 \}
+28 
+29 void cmdLedOff()
+30 \{
+31     // Turn LED off
+32     Serial.println(F("LED off"));
+33     digitalWrite(LED\_BUILTIN, LOW);
+34 \}
+\end{DoxyCode}
+
+
+{\bfseries Set default handler}
+
+Optional\+: The default handler will be called when the command is not recognized.
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 void setup()
+3 \{   
+4     ...
+5 
+6     // Set default handler for unknown commands
+7     term.setDefaultHandler(unknownCommand);
+8 \}
+9 
+10 void unknownCommand(const char *command)
+11 \{
+12     // Print unknown command
+13     Serial.print(F("Unknown command: "));
+14     Serial.println(command);
+15 \}
+\end{DoxyCode}
+
+
+{\bfseries Read from serial port}
+
+Read from the serial port in the main loop\+:
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 void loop()
+3 \{
+4     // Read from serial port and handle command callbacks
+5     term.readSerial();
+6 \}
+\end{DoxyCode}
+
+
+{\bfseries Get next argument}
+
+Get pointer to next argument in serial receive buffer\+:
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 char *arg;
+3 
+4 // Get next argument
+5 arg = term.getNext();
+6 if (arg != NULL) \{
+7     Serial.print(F("Argument: "));
+8     Serial.println(arg);
+9 \} else \{
+10     Serial.println(F("No argument"));
+11 \}
+\end{DoxyCode}
+
+
+{\bfseries Get remaining characters}
+
+Get pointer to remaining characters in serial receive buffer\+:
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 char *arg;
+3 
+4 // Get remaining characters
+5 arg = term.getRemaining();
+6 if (arg != NULL) \{
+7     Serial.print(F("Remaining: "));
+8     Serial.println(arg);
+9 \}
+\end{DoxyCode}
+
+
+{\bfseries Clear buffer}
+
+Optional\+: The serial receive buffer can be cleared with the following call\+:
+
+
+\begin{DoxyCode}
+1 \{c++\}
+2 term.clearBuffer();
+\end{DoxyCode}
+
+
+\subsection*{Library configuration}
+
+{\ttfamily \hyperlink{_serial_terminal_8h}{Serial\+Terminal.\+h}} contains the following configuration macro\textquotesingle{}s\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily S\+T\+\_\+\+R\+X\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE} \+: The default serial receive buffer size is 32 Bytes. This includes the command and arguments, excluding the {\ttfamily \textquotesingle{}\textbackslash{}0\textquotesingle{}} character.
+\item {\ttfamily S\+T\+\_\+\+N\+U\+M\+\_\+\+C\+O\+M\+M\+A\+N\+D\+\_\+\+C\+H\+A\+RS}\+: The default number of command characters is 8 Bytes, excluding the {\ttfamily \textquotesingle{}\textbackslash{}0\textquotesingle{}} character.
+\end{DoxyItemize}
+
+\subsection*{Library dependencies}
+
+
+\begin{DoxyItemize}
+\item None.
+\end{DoxyItemize}
+
+\subsection*{Library installation}
+
+Please refer to the \href{https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki}{\tt Wiki} page.
+
+\subsection*{Other Arduino Libraries and Sketches from Erriez}
+
+
+\begin{DoxyItemize}
+\item \href{https://github.com/Erriez/ErriezArduinoLibrariesAndSketches}{\tt Erriez Libraries and Sketches} 
+\end{DoxyItemize}

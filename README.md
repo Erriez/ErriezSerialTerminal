@@ -14,7 +14,9 @@ Any Arduino hardware with a serial port.
 
 ## Examples
 
-* Examples | Erriez Serial Terminal | [GettingStarted](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/GettingStarted/GettingStarted.ino)
+Arduino IDE | Examples | Erriez Serial Terminal |
+
+* [SerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/SerialTerminal/SerialTerminal.ino)
 
 
 ## Documentation

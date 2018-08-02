@@ -8,4 +8,4 @@
 # git pull
 
 # Build example(s)
-platformio ci --lib=".." --project-conf=platformio.ini ../examples/GettingStarted/GettingStarted.ino
+platformio ci --lib=".." --project-conf=platformio.ini ../examples/SerialTerminal/SerialTerminal.ino

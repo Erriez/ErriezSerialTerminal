@@ -35,7 +35,7 @@ Default newline character: ```'\n'```
 Default delimiter character: ```Space```
 
 ```c++
-#include <SerialTerminal.h>
+#include <ErriezSerialTerminal.h>
 
 // Newline character '\r' or '\n'
 char newlineChar = '\n'; 

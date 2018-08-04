@@ -23,14 +23,14 @@
  */
 
 /*!
+ * \file ErriezSerialTerminal.cpp
  * \brief Serial terminal library for Arduino.
- * \file SerialTerminal.cpp
  * \details
  *      Source:         https://github.com/Erriez/ErriezSerialTerminal
  *      Documentation:  https://erriez.github.io/ErriezSerialTerminal
  */
 
-#include "SerialTerminal.h"
+#include "ErriezSerialTerminal.h"
 
 /*!
  * \brief SerialTerminal constructor.

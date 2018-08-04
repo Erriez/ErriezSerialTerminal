@@ -51,9 +51,9 @@ include_directories(${LIB_SRC_DIR})
 generate_arduino_library(
         ${PROJECT_NAME}Lib
         SRCS
-            ${LIB_SRC_DIR}/SerialTerminal.cpp
+            ${LIB_SRC_DIR}/ErriezSerialTerminal.cpp
         HDRS
-            ${LIB_SRC_DIR}/SerialTerminal.h
+            ${LIB_SRC_DIR}/ErriezSerialTerminal.h
 )
 
 # Configure project

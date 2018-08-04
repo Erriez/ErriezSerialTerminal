@@ -23,15 +23,15 @@
  */
 
 /*!
+ * \file ErriezSerialTerminal.h
  * \brief Serial terminal library for Arduino
- * \file SerialTerminal.h
  * \details
  *      Source:         https://github.com/Erriez/ErriezSerialTerminal
  *      Documentation:  https://erriez.github.io/ErriezSerialTerminal
  */
 
-#ifndef SERIAL_TERMINAL_H_
-#define SERIAL_TERMINAL_H_
+#ifndef ERRIEZ_SERIAL_TERMINAL_H_
+#define ERRIEZ_SERIAL_TERMINAL_H_
 
 #include <Arduino.h>
 #include <string.h>
@@ -80,4 +80,4 @@ private:
     void (*_defaultHandler)(const char *);
 };
 
-#endif // SERIAL_TERMINAL_H_
+#endif // ERRIEZ_SERIAL_TERMINAL_H_

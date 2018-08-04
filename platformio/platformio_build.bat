@@ -11,3 +11,5 @@ rem git pull
 
 rem Build example(s)
 platformio ci --lib=".." --project-conf=platformio.ini ../examples/SerialTerminal/SerialTerminal.ino
+
+@pause

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getnext',['getNext',['../class_serial_terminal.html#a395354bac6bf8858bf59c731d7681ac3',1,'SerialTerminal']]],
-  ['getremaining',['getRemaining',['../class_serial_terminal.html#a3555408d2aa67d07911e25d65854a819',1,'SerialTerminal']]]
+  ['erriezserialterminal_2ecpp',['ErriezSerialTerminal.cpp',['../_erriez_serial_terminal_8cpp.html',1,'']]],
+  ['erriezserialterminal_2eh',['ErriezSerialTerminal.h',['../_erriez_serial_terminal_8h.html',1,'']]]
 ];

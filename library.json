@@ -1,0 +1,25 @@
+{
+    "name": "ErriezSerialTerminal",
+    "version": "1.1.0",
+    "keywords": "arduino, library, serial, terminal, ascii, commands, arguments, command-line, parser, build scripts, documentation, examples",
+    "description": "Universal Serial Terminal library for Arduino to parse ASCII commands and arguments.",
+    "homepage": "https://github.com/Erriez/ErriezSerialTerminal",
+    "license": "MIT",
+    "authors": {
+        "name": "Erriez",
+        "url": "https://github.com/Erriez",
+        "maintainer": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Erriez/ErriezSerialTerminal.git",
+        "branch": "master"
+    },
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "atmelsam",
+        "espressif8266",
+        "espressif32"
+    ]
+}

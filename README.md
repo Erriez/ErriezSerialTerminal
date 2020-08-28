@@ -16,13 +16,13 @@ Any Arduino hardware with a serial port.
 
 Arduino IDE | Examples | Erriez Serial Terminal |
 
-* [SerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/SerialTerminal/SerialTerminal.ino)
+* [ErriezSerialTerminal](https://github.com/Erriez/ErriezSerialTerminal/blob/master/examples/ErriezSerialTerminal/ErriezSerialTerminal.ino)
 
 
 ## Documentation
 
 - [Online HTML](https://erriez.github.io/ErriezSerialTerminal)
-- [Download PDF](https://github.com/Erriez/ErriezSerialTerminal/raw/gh-pages/latex/ErriezSerialTerminal.pdf)
+- [Download PDF](https://github.com/Erriez/ErriezSerialTerminal/raw/master/ErriezSerialTerminal.pdf)
 
 
 ## Usage

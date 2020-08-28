@@ -1,6 +1,6 @@
 ################################################################################
 # Title         : .travis.yml
-# Date created  : 2 August 2018
+# Date created  : 9 July 2020
 # Author        : Erriez"
 #
 # This is a Continuous Integration script for Travis CI:
@@ -10,66 +10,46 @@
 #
 #############################################################################
 
-# This will run on Travis' 'new' container-based infrastructure
-sudo: false
+# Use Ubuntu 18.04 (Bionic Beaver)
+dist: bionic
 
-# Use Python 2.7 for PlatformIO
+# PlatformIO requires deprecated Python 2.7
 language: python
-python:
-    - "2.7"
+python: 2.7
 
 # Cache platformIO directory
 cache:
-   directories:
-       - "~/.platformio"
+  directories:
+    - "~/.platformio"
 
 # Blacklist
 branches:
   except:
-    - gh-paghes
-
-# Environment variables
-env:
-  global:
-    - GH_REPO_NAME: ErriezSerialTerminal
-    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
-    - GH_REPO_REF: github.com/Erriez/ErriezSerialTerminal.git
+    - gh-pages
 
 # Install dependencies
 addons:
   apt:
     packages:
-      - doxygen-latex
-
-before_install:
-  # Install doxygen 1.8.11 from binary, because older versions throw errors on markdown code with
-  # images inside links (like the build status in the README) and it's the only way to get a newer
-  # doxygen in Ubuntu
-  - export DOXYGEN_VER=doxygen-1.8.11
-  - export DOXYGEN_TAR=${DOXYGEN_VER}.linux.bin.tar.gz
-  - export DOXYGEN_URL="http://ftp.stack.nl/pub/users/dimitri/${DOXYGEN_TAR}"
+      - doxygen
+      - graphviz
 
 # Install Python PlatformIO
 install:
-   - pip install -U platformio
-   - platformio update
+  - pip install -U platformio
+  - platformio update
 
-# Run PlatformIO CI build
+# Build script
 script:
-  # Build Arduino examples with PlatformIO by using the library sources
-  - chmod +x .auto-build.sh
-  - ./.auto-build.sh
+  - bash .auto-build.sh
 
-# Build and deploy Doxygen documentation only on push master branch
-after_success:
-  - |
-    if [ "${TRAVIS_BRANCH}" == "master" ] ; then
-      # Extract Doxygen binaries and set path
-      wget -O - "${DOXYGEN_URL}" | tar xz -C ${TMPDIR-/tmp} ${DOXYGEN_VER}/bin/doxygen
-      export PATH="${TMPDIR-/tmp}/${DOXYGEN_VER}/bin:$PATH"
+# Push Doxygen html directory to Github gh-pages branch when building master
+deploy:
+  provider: pages               # Travis-CI - Github gh-pages
+  skip_cleanup: true            # Do not cleanup before push
+  github_token: $GITHUB_TOKEN   # Secure variable in Travis-CI project
+  keep_history: true
+  local_dir: html               # Push Doxygen html directory
+  on:
+    branch: master              # Only when pushing to master branch
 
-      # Build Doxygen HTML and PDF
-      cd $TRAVIS_BUILD_DIR
-      chmod +x .deploy-doc.sh
-      ./.deploy-doc.sh
-    fi

@@ -1,6 +1,4 @@
 # Exclude the following files to make this a C++ project
-cmake/* linguist-vendored=true
-CMakeLists.txt linguist-vendored=true
 *.sh linguist-vendored=true
 *.bat linguist-vendored=true
 

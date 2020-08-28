@@ -56,7 +56,7 @@ void setup()
 {
     // Initialize serial port
     Serial.begin(115200);
-    Serial.println(F("Serial terminal example."));
+    Serial.println(F("\nSerial terminal example."));
     Serial.println(F("Type 'help' to display usage."));
 
     // Initialize the built-in LED

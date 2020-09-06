@@ -54,6 +54,9 @@ void cmdPrintStringArguments();
 
 void setup()
 {
+    // Startup delay to initialize serial port
+    delay(500);
+
     // Initialize serial port
     Serial.begin(115200);
     Serial.println(F("\nSerial terminal example."));

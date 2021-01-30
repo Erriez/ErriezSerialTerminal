@@ -18,6 +18,9 @@ clearBuffer	KEYWORD2
 next	KEYWORD2
 remaining	KEYWORD2
 
+setSerialEcho         KEYWORD2
+setPostCommandHandler KEYWORD2
+
 #######################################
 # Instances (KEYWORD2)
 #######################################

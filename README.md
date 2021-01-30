@@ -174,6 +174,36 @@ term.clearBuffer();
 ```
 
 
+**Enable/Disable Character Echoing**
+
+Optional: Allow for any entered charecters to be printed back to the Serial interface.
+This is useful for terminal programs like PuTTY.
+
+```c++
+term.setSerialEcho(true); //Enable Character Echoing
+```
+
+
+**Set Post Command Handler**
+
+Optional: Add a function to be called AFTER a command has been handled.
+
+```c++
+void setup()
+{   
+    ...
+
+    // Set default handler for unknown commands
+    term.setDefaultHandler(postCommandHandler);
+}
+
+void setPostCommandHandler()
+{
+    // Print '> ' for a primitive user UI
+    Serial.print(F("> "));
+}
+```
+
 ## Library configuration
 
 ```SerialTerminal.h``` contains the following configuration macro's:

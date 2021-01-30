@@ -52,7 +52,6 @@ void cmdLedOff();
 void cmdPrintHello();
 void cmdPrintIntArgument();
 void cmdPrintStringArguments();
-
 void printConsoleChar();
 
 void setup()
@@ -65,7 +64,7 @@ void setup()
     Serial.println(F("\nSerial terminal example."));
     Serial.println(F("Type 'help' to display usage."));
     printConsoleChar();
-    
+
     // Initialize the built-in LED
     pinMode(LED_PIN, OUTPUT);
     digitalWrite(LED_PIN, LOW);
@@ -94,7 +93,8 @@ void loop()
     term.readSerial();
 }
 
-void printConsoleChar(){
+void printConsoleChar()
+{
     Serial.print(F("> "));
 }
 

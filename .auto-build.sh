@@ -20,6 +20,7 @@ function autobuild()
 
     echo "Building examples..."
     platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezSerialTerminal/ErriezSerialTerminal.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezSerialTerminal_EchoAndCallback/ErriezSerialTerminal_EchoAndCallback.ino
 }
 
 function generate_doxygen()

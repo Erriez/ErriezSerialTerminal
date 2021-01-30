@@ -77,6 +77,31 @@ void SerialTerminal::addCommand(const char *command, void (*function)())
     _numCommands++;
 }
 
+
+/*!
+ * \brief Set the control state to echo any printable chars to the console.
+ * \details
+ *      Set the control state to echo any printable chars to the console.
+ * \param doEcho
+ *      Should all printable chars be echoed to the serial console?
+ */
+void SerialTerminal::setSerialEcho(bool doEcho)
+{
+    doCharEcho = doEcho;
+}
+
+/*!
+ * \brief Set post command handler callback for after all handled commands.
+ * \details
+ *      Store post command handler which will be called when after executing any handled command.
+ * \param function
+ *      Address of the callback function. This function will be called after any handled event.
+ */
+void SerialTerminal::setPostCommandHandler(void (*function)(void))
+{
+    _postCommandHandler = function;
+}
+
 /*!
  * \brief Set default callback handler for unknown commands.
  * \details
@@ -107,6 +132,11 @@ void SerialTerminal::readSerial()
 
         // Check newline character \c '\\r' or \c '\\n' at the end of a command
         if (c == _newlineChar) {
+            //Echo received char
+            if (doCharEcho) {
+                Serial.println();
+            }
+
             // Search for command at start of buffer
             command = strtok_r(_rxBuffer, _delimiter, &_lastPos);
 
@@ -125,12 +155,22 @@ void SerialTerminal::readSerial()
                     (*_defaultHandler)(command);
                 }
             }
+
+            //Run the post command handler.
+            if (_postCommandHandler) {
+                (*_postCommandHandler)();
+            }
+
             clearBuffer();
         } else if (isprint(c)) {
             // Store printable characters in serial receive buffer
             if (_rxBufferIndex < ST_RX_BUFFER_SIZE) {
                 _rxBuffer[_rxBufferIndex++] = c;
                 _rxBuffer[_rxBufferIndex] = '\0';
+            }
+            //Echo received char
+            if (doCharEcho) {
+                Serial.print(c);
             }
         }
     }

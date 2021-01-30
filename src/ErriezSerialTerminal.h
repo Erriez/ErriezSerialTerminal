@@ -57,6 +57,9 @@ public:
     void addCommand(const char *command, void(*function)());
     void setDefaultHandler(void (*function)(const char *));
 
+    void setSerialEcho(bool doEcho);
+    void setPostCommandHandler(void (*function)(void));
+
     void readSerial();
     void clearBuffer();
 
@@ -76,6 +79,9 @@ private:
     char _rxBuffer[ST_RX_BUFFER_SIZE + 1];
     byte _rxBufferIndex;
     char *_lastPos;
+
+    bool doCharEcho;
+    void (*_postCommandHandler)(void);
 
     void (*_defaultHandler)(const char *);
 };

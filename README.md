@@ -193,7 +193,7 @@ void setup()
 {   
     ...
 
-    // Set default handler for unknown commands
+    // Set handler to be run AFTER a command has been handled.
     term.setDefaultHandler(postCommandHandler);
 }
 

@@ -85,7 +85,8 @@ void SerialTerminal::addCommand(const char *command, void (*function)())
  * \param doEcho
  *      Should all printable chars be echoed to the serial console?
  */
-void SerialTerminal::setSerialEcho(bool doEcho){
+void SerialTerminal::setSerialEcho(bool doEcho)
+{
     doCharEcho = doEcho;
 }
 
@@ -132,8 +133,9 @@ void SerialTerminal::readSerial()
         // Check newline character \c '\\r' or \c '\\n' at the end of a command
         if (c == _newlineChar) {
             //Echo received char
-            if (doCharEcho)
+            if (doCharEcho) {
                 Serial.println();
+            }
 
             // Search for command at start of buffer
             command = strtok_r(_rxBuffer, _delimiter, &_lastPos);
@@ -155,8 +157,9 @@ void SerialTerminal::readSerial()
             }
 
             //Run the post command handler.
-            if (_postCommandHandler)
+            if (_postCommandHandler) {
                 (*_postCommandHandler)();
+            }
 
             clearBuffer();
         } else if (isprint(c)) {
@@ -166,8 +169,9 @@ void SerialTerminal::readSerial()
                 _rxBuffer[_rxBufferIndex] = '\0';
             }
             //Echo received char
-            if (doCharEcho)
+            if (doCharEcho) {
                 Serial.print(c);
+            }
         }
     }
 }

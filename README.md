@@ -178,6 +178,7 @@ term.clearBuffer();
 
 Optional: Allow for any entered charecters to be printed back to the Serial interface.
 This is useful for terminal programs like PuTTY.
+Supports both backspace characters, ^H and ^127.
 
 ```c++
 term.setSerialEcho(true); //Enable Character Echoing

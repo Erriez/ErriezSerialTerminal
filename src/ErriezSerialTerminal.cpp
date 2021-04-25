@@ -162,15 +162,24 @@ void SerialTerminal::readSerial()
             }
 
             clearBuffer();
+        // either ^H og 127 backspace chars
+        } else if (c == '\b' || c == 127) {
+            if (_rxBufferIndex > 0) {
+                _rxBufferIndex--;
+                _rxBuffer[_rxBufferIndex] = '\0';
+                if (doCharEcho) {
+                    Serial.print("\b \b"); // 1 char back, space, 1 char back
+                }
+            }
         } else if (isprint(c)) {
             // Store printable characters in serial receive buffer
             if (_rxBufferIndex < ST_RX_BUFFER_SIZE) {
                 _rxBuffer[_rxBufferIndex++] = c;
                 _rxBuffer[_rxBufferIndex] = '\0';
-            }
-            //Echo received char
-            if (doCharEcho) {
-                Serial.print(c);
+                //Echo received char
+                if (doCharEcho) {
+                    Serial.print(c);
+                }
             }
         }
     }

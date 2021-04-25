@@ -1,7 +1,5 @@
 # Serial Terminal library for Arduino
 
-[![Build Status](https://travis-ci.org/Erriez/ErriezSerialTerminal.svg?branch=master)](https://travis-ci.org/Erriez/ErriezSerialTerminal)
-
 This is a universal Serial Terminal library for Arduino to parse ASCII commands and arguments.
 
 ![Serial Terminal](https://raw.githubusercontent.com/Erriez/ErriezSerialTerminal/master/extras/ScreenshotSerialTerminal.png)
@@ -9,7 +7,22 @@ This is a universal Serial Terminal library for Arduino to parse ASCII commands 
 
 ## Hardware
 
-Any Arduino hardware with a serial port.
+Any Arduino hardware with a serial port, such as:
+
+Arduino:
+* UNO
+* Nano
+* Micro
+* Pro or Pro Mini
+* Mega or Mega2560
+* Leonardo
+
+Other targets:
+* DUE
+* ESP8266
+* ESP32
+* SAMD21
+* STM32F1
 
 
 ## Examples

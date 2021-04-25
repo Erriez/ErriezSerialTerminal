@@ -17,10 +17,12 @@ function autobuild()
     BOARDS_AVR="--board uno --board micro --board miniatmega328 --board nanoatmega328new --board pro16MHzatmega328 --board pro8MHzatmega328 --board megaatmega2560 --board leonardo"
     BOARDS_ARM="--board due"
     BOARDS_ESP="--board d1_mini --board nodemcuv2 --board lolin_d32"
+    BOARDS_SAMD="--board sparkfun_samd21_mini_usb"
+    BOARDS_STM32="--board blackpill_f103c8"
 
     echo "Building examples..."
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezSerialTerminal/ErriezSerialTerminal.ino
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezSerialTerminal_EchoAndCallback/ErriezSerialTerminal_EchoAndCallback.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} ${BOARDS_SAMD} ${BOARDS_STM32} examples/ErriezSerialTerminal/ErriezSerialTerminal.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} ${BOARDS_SAMD} ${BOARDS_STM32} examples/ErriezSerialTerminal_EchoAndCallback/ErriezSerialTerminal_EchoAndCallback.ino
 }
 
 function generate_doxygen()

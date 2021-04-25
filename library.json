@@ -1,6 +1,6 @@
 {
     "name": "ErriezSerialTerminal",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "keywords": "arduino, library, serial, terminal, ascii, commands, arguments, command-line, parser, build scripts, documentation, examples",
     "description": "Universal Serial Terminal library for Arduino to parse ASCII commands and arguments.",
     "homepage": "https://github.com/Erriez/ErriezSerialTerminal",

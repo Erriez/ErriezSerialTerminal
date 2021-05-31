@@ -40,7 +40,7 @@ char newlineChar = '\n';
 char delimiterChar = ' ';
 
 // Create serial terminal object
-SerialTerminal term(newlineChar, delimiterChar);
+SerialTerminal term(newlineChar, delimiterChar, &Serial);
 
 // Function prototypes
 void unknownCommand(const char *command);

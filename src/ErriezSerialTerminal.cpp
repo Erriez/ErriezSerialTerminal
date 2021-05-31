@@ -41,7 +41,7 @@
  *      Delimiter separator character between commands and arguments.\n
  *      Default: space.
  */
-SerialTerminal::SerialTerminal(char newlineChar, char delimiterChar) :
+SerialTerminal::SerialTerminal(char newlineChar, char delimiterChar, HardwareSerial *serial) :
         _commandList(NULL),
         _numCommands(0),
         _newlineChar(newlineChar),
@@ -51,6 +51,7 @@ SerialTerminal::SerialTerminal(char newlineChar, char delimiterChar) :
     // strtok_r needs a null-terminated string
     _delimiter[0] = delimiterChar;
     _delimiter[1] = '\0';
+	_serial = serial;
 
     // Clear receive buffer
     clearBuffer();
@@ -126,15 +127,15 @@ void SerialTerminal::readSerial()
     char *command;
     char c;
 
-    while (Serial.available() > 0) {
+    while (_serial->available() > 0) {
         // Read one character from serial port
-        c = (char)Serial.read();
+        c = (char)_serial->read();
 
         // Check newline character \c '\\r' or \c '\\n' at the end of a command
         if (c == _newlineChar) {
             //Echo received char
             if (doCharEcho) {
-                Serial.println();
+                _serial->println();
             }
 
             // Search for command at start of buffer
@@ -168,7 +169,7 @@ void SerialTerminal::readSerial()
                 _rxBufferIndex--;
                 _rxBuffer[_rxBufferIndex] = '\0';
                 if (doCharEcho) {
-                    Serial.print("\b \b"); // 1 char back, space, 1 char back
+                    _serial->print("\b \b"); // 1 char back, space, 1 char back
                 }
             }
         } else if (isprint(c)) {
@@ -178,7 +179,7 @@ void SerialTerminal::readSerial()
                 _rxBuffer[_rxBufferIndex] = '\0';
                 //Echo received char
                 if (doCharEcho) {
-                    Serial.print(c);
+                    _serial->print(c);
                 }
             }
         }

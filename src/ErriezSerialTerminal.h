@@ -52,7 +52,7 @@
 class SerialTerminal
 {
 public:
-    explicit SerialTerminal(char newlineChar='\n', char delimiterChar=' ');
+    explicit SerialTerminal(char newlineChar='\n', char delimiterChar=' ', HardwareSerial *serial=&Serial);
 
     void addCommand(const char *command, void(*function)());
     void setDefaultHandler(void (*function)(const char *));
@@ -79,6 +79,7 @@ private:
     char _rxBuffer[ST_RX_BUFFER_SIZE + 1];
     byte _rxBufferIndex;
     char *_lastPos;
+	HardwareSerial *_serial;
 
     bool doCharEcho;
     void (*_postCommandHandler)(void);

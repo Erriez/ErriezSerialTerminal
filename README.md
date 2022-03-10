@@ -208,7 +208,7 @@ void setup()
     ...
 
     // Set handler to be run AFTER a command has been handled.
-    term.setDefaultHandler(postCommandHandler);
+    term.setPostCommandHandler(postCommandHandler);
 }
 
 void setPostCommandHandler()
